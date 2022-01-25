@@ -58,6 +58,6 @@ jobs:
                   curl -X POST \
                   https://api.github.com/repos/gravitl/netmaker-devops/actions/workflows/terraform.yml/dispatches \
                   -H 'Accept: application/vnd.github.everest-preview+json' \
-                  -H 'Content-Type: application/json" \
+                  -H 'Content-Type: application/json' \
                   -u ${{ secrets.DEVOPS_API_TOKEN }} \
                   --data '{"ref": "main"}'
