@@ -43,13 +43,13 @@ jobs:
                 cd netclient
                 go build -ldflags="-X 'main.version=testing'" .
                 curl -H 'Authorization: Bearer ${{ secrets.NUSAK_MASTERKEY }}' \
-                -H 'Content-Type: multipart/form-data' --form upload='./netclient' \
-                -X POST https://dashboard.nusak.ca/api/file/netclient
-    #deploy:
-         #runs-on: ubuntu-latest
-         #steps:
-            #- name: Deploy Testing Server and Client(s)
-            #  run: |
-            #      curl -X POST https://api.github.com/mattkasun/terraform-test/dispatches \
-            #      -H 'Accept: application/vnd.github.everest-preview+json' \
-            #      -u ${{ secrets.ACCESS_TOKEN }} 
+                -H 'Content-Type: multipart/form-data' -F "file=@./netclient" \
+                -X POST https://fileupload.clustercat.com
+    deploy:
+         runs-on: ubuntu-latest
+         steps:
+            - name: Deploy Testing Server and Client(s)
+              run: |
+                  curl -X POST https://api.github.com/mattkasun/terraform-test/dispatches \
+                  -H 'Accept: application/vnd.github.everest-preview+json' \
+                  -u ${{ secrets.DEVOPS_API_TOKEN }} 
