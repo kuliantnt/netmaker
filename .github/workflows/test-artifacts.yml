@@ -51,9 +51,15 @@ jobs:
                 -X POST https://fileupload.clustercat.com
     deploy:
          runs-on: ubuntu-latest
+         needs: |
+           - docker
+           - netclient
          steps:
             - name: Deploy Testing Server and Client(s)
               run: |
-                  curl -X POST https://api.github.com/gravitl/terraform-test/dispatches \
+                  curl -X POST \
+                  https://api.github.com/repos/gravitl/netmaker-devops/actions/workflows/terraform.yml/dispatches \
                   -H 'Accept: application/vnd.github.everest-preview+json' \
-                  -u ${{ secrets.DEVOPS_API_TOKEN }} 
+                  -H 'Content-Type: application/json" \
+                  -u ${{ secrets.DEVOPS_API_TOKEN }} \
+                  --data '{"ref": "main"}'
