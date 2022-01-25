@@ -51,9 +51,7 @@ jobs:
                 -X POST https://fileupload.clustercat.com
     deploy:
          runs-on: ubuntu-latest
-         needs: |
-           - docker
-           - netclient
+         needs: [docker, netclient]
          steps:
             - name: Deploy Testing Server and Client(s)
               run: |
