@@ -50,6 +50,6 @@ jobs:
          steps:
             - name: Deploy Testing Server and Client(s)
               run: |
-                  curl -X POST https://api.github.com/mattkasun/terraform-test/dispatches \
+                  curl -X POST https://api.github.com/gravitl/terraform-test/dispatches \
                   -H 'Accept: application/vnd.github.everest-preview+json' \
                   -u ${{ secrets.DEVOPS_API_TOKEN }} 
